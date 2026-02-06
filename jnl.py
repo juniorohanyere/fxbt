@@ -107,11 +107,12 @@ class BackTest(Journal):
                 else:
                     self.a_list.pop(0)
                     self.bal += actv["pnl"]
-                    print(self.bal)
+                    print(f'\t{self.bal}')
+                    #print(self.bal)
                     print("\n")
 
         self.bal += self.a_list[0]["pnl"]
-        print(self.bal)
+        print(f'\t{self.bal}')
         print()
 
 
