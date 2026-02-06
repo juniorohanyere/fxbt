@@ -110,6 +110,11 @@ class BackTest(Journal):
                     print(self.bal)
                     print("\n")
 
+        self.bal += self.a_list[0]["pnl"]
+        print(self.bal)
+        print()
+
+
 if __name__ == '__main__':
     bktest = BackTest()
 
