@@ -6,7 +6,7 @@ from decimal import Decimal, ROUND_HALF_UP
 
 class Journal:
     def __init__(self):
-        self.json_file = 'test.json'
+        self.json_file = 'jnl.json'
         self.jnl = ""
 
     #def r_journal(self):
