@@ -4,21 +4,19 @@ import json
 from datetime import datetime
 from decimal import Decimal, ROUND_HALF_UP
 
+
 class Journal:
     def __init__(self):
         self.json_file = 'jnl.json'
         self.jnl = ""
 
-    #def r_journal(self):
-
     def from_json(self):
         try:
-            with open (self.json_file, 'r') as file:
+            with open(self.json_file, 'r') as file:
                 rfile = file.read()
         except (FileNotFoundError) as e:
             print(e)
             sys.exit(2)
-
 
         ld = json.loads(rfile)
 
@@ -29,9 +27,6 @@ class Journal:
 
         ents = []
         for entry in entries:
-            #d_s = entry["date_set"]
-            #d_o = entry["date_opened"]
-            #d_c = entry["date_closed"]
             new = entry.copy()
             yy, mm, dd, hh, mn, ss = entry["date_set"]
             new["date_set"] = datetime(yy, mm, dd, hh, mn, ss)
@@ -47,6 +42,7 @@ class Journal:
         srtd = sorted(ents, key=lambda x: x["date_set"])
 
         return srtd
+
 
 class BackTest(Journal):
     def __init__(self):
@@ -73,13 +69,9 @@ class BackTest(Journal):
             srtd = sorted(actvs, key=lambda x: x["actv"])
 
             for actv in srtd:
-                #print(actv)
                 if actv == new:
-                    #print("empty")
-                    #self.a_list = []
                     rr = entry["rr"]
                     risk = self.risk * self.bal
-
 
                     val = Decimal(str(rr))
                     rr = val.quantize(self.deci, rounding=ROUND_HALF_UP)
@@ -108,7 +100,6 @@ class BackTest(Journal):
                     self.a_list.pop(0)
                     self.bal += actv["pnl"]
                     print(f'\t{self.bal}')
-                    #print(self.bal)
                     print("\n")
 
         self.bal += self.a_list[0]["pnl"]
